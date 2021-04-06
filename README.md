@@ -1,3 +1,3 @@
-# example-apps
+# showcase
 
-Example applications with Astrobase.
+A collection of awesomeness that showcases Astrobase.
