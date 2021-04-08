@@ -72,6 +72,12 @@ $ kubectl proxy
 $ open http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/deployment/default/nginx-deployment?namespace=default
 ```
 
+You may need to retrieve your admin token if using the kubeconfig to authenticate does not work.
+
+```sh
+$ aws eks get-token --region us-east-1 --cluster-name simple
+```
+
 ## Destroy resources
 
 ```sh
