@@ -99,14 +99,14 @@ deployment.apps "nginx-deployment" deleted
 ## Destroy the cluster
 
 ```sh
-$ astrobase destroy -f cluster.yaml -v "LOCATION=us-central1 PROJECT_ID=astrobase-284118"
+$ astrobase destroy -f cluster.yaml -v "LOCATION=us-central1 PROJECT_ID=$(gcloud config get-value project)"
 {
   "name": "operation-1617858934526-c8422870",
   "zone": "us-central1",
   "operationType": "DELETE_CLUSTER",
   "status": "RUNNING",
-  "selfLink": "https://container.googleapis.com/v1beta1/projects/715209933323/locations/us-central1/operations/operation-1617858934526-c8422870",
-  "targetLink": "https://container.googleapis.com/v1beta1/projects/715209933323/locations/us-central1/clusters/simple",
+  "selfLink": "https://container.googleapis.com/v1beta1/projects/<hidden>/locations/us-central1/operations/operation-1617858934526-c8422870",
+  "targetLink": "https://container.googleapis.com/v1beta1/projects/<hidden>/locations/us-central1/clusters/simple",
   "startTime": "2021-04-08T05:15:34.526759096Z"
 }
 ```
