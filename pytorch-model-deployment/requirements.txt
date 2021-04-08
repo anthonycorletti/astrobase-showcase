@@ -1,0 +1,6 @@
+flask
+flask-restful
+pillow
+requests
+torch
+torchvision
