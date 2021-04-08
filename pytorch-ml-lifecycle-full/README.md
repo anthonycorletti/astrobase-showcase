@@ -1,6 +1,6 @@
 # PyTorch ML Lifecycle
 
-Collecting data, training, and deploying models used by an api with PyTorch on EKS with Astrobase.
+Learn about the ML model lifecycle with PyTorch, how to API-ify those models, and deploy them to EKS with Astrobase.
 
 This example is more involved, and takes about an hour to work through.
 
@@ -367,6 +367,12 @@ This may take a few minutes depending on your computer's CPU. It took a test 201
 ## Deploying PyTorch Models to EKS with Astrobase
 
 So now all of this is fine and dandy ... but what if we want to deploy these features to AWS?
+
+Now, we have to gather these scripts into a containerized API and deploy them to EKS with Astrobase.
+
+Note that you might not want to use these examples as-is for production. Why? Well, you should be referencing external data stores and use multiple environments. What's great about Astrobase is that it's easy to build and shutdown training environments, so you would need to do some extra work to parameterize the dataset references and training steps. If you and your team need help doing this, [get in touch with us](mailto:anthony@astrobase.co)!
+
+__TODO__
 
 **Credits**
 - https://machinelearningmastery.com/pytorch-tutorial-develop-deep-learning-models/
