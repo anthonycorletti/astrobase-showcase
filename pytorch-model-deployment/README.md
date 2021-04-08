@@ -120,6 +120,14 @@ $ docker build -t astrobase/mlapi .
 $ docker push astrobase/mlapi
 ```
 
+Initialize astrobase, check commands, and make sure you have a profile that references AWS credentials
+
+```sh
+$ astrobase init
+$ astrobase check commands
+$ astrobase profile current
+```
+
 Create a cluster
 
 ```sh
