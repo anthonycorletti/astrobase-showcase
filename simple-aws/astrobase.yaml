@@ -1,9 +1,0 @@
-apiVersion: v0.1.0
-clusters:
-    - name: astrobase-fastapi-example
-      provider: gke
-      zone: us-central1-a
-      project_id: my-project-id
-services:
-    - name: simple-app
-      provider: kubernetes

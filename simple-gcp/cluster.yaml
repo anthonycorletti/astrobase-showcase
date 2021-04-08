@@ -1,0 +1,21 @@
+apiVersion: v0
+clusters:
+  - name: simple
+    provider: gke
+    location: $LOCATION
+    project_id: $PROJECT_ID
+    resourceLabels:
+      name: simple
+      env: dev
+    nodePools:
+      - name: cpu
+        initialNodeCount: 1
+        autoscaling:
+          enabled: true
+          minNodeCount: 1
+          maxNodeCount: 3
+        config:
+          metadata:
+            nodepool: cpu
+          labels:
+            type: cpu

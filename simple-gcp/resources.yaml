@@ -1,0 +1,12 @@
+apiVersion: v0
+resources:
+  - name: kubernetes-dashboard
+    provider: gke
+    cluster_name: simple
+    cluster_location: $LOCATION
+    resource_location: https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
+  - name: nginx
+    provider: gke
+    cluster_name: simple
+    cluster_location: $LOCATION
+    resource_location: kubernetes
