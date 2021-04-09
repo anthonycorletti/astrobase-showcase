@@ -372,7 +372,7 @@ Now, we have to gather these scripts into a containerized API and deploy them to
 
 This is a relatively large task and is still on our TODO list along with many other things. If you and your team need help doing this immediately, [get in touch with us](mailto:anthony@astrobase.co) or open an [issue](https://github.com/astrobase/showcase/issues) asking about what you'd like to see. In the meantime, star and watch this repo for updates to our guides on how to turn these ML lifecycle scripts into kubernetes ML pipelines with Astrobase.
 
-Note that you might not want to use these examples as-is for production. Why? Well, you should be referencing external data stores and use multiple environments. What's great about Astrobase is that it's easy to build and shutdown training environments, so you would need to do some extra work to parameterize the dataset references and training steps. If you and your team need help doing this too, [get in touch with us](mailto:anthony@astrobase.co).
+Note that you might not want to use these examples as-is for production. Why? Well, you should be referencing external data stores and use multiple environments for starters. What's great about Astrobase is that it's easy to build and shutdown training environments, so you would need to do some extra work to parameterize the dataset references and training steps. If you and your team need help doing this too, [get in touch with us](mailto:anthony@astrobase.co).
 
 **Credits**
 - https://machinelearningmastery.com/pytorch-tutorial-develop-deep-learning-models/
