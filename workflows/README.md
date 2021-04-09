@@ -63,8 +63,8 @@ $ argo submit --watch workflows/workflows/hello-world.yaml
 ## Emit Events
 
 ```sh
-$ kubectl port-forward svc/events-webhook 27477:2747
-$ curl -d '{"message": "hello world"}' -H "Content-Type: application/json" -X POST http://localhost:27477/example
+$ kubectl port-forward $(kubectl get pod -l app=events-webhook -o name) 12000:12000
+$ curl -d '{"message": "hello world"}' -H "Content-Type: application/json" -X POST http://localhost:12000/example
 ```
 
 And check that the workflow was emitted!
