@@ -154,3 +154,9 @@ $ curl -s -X POST -d '{"url": "https://i.imgur.com/NZHKADF.jpg"}' -H 'Content-Ty
   66.94183349609375
 ]
 ```
+
+And tear down the cluster to remove everything!
+
+```sh
+astrobase destroy -f cluster.yaml -v "CLUSTER_ROLE_ARN=$CLUSTER_ROLE_ARN NODE_ROLE_ARN=$NODE_ROLE_ARN SUBNET_ID_0=$SUBNET_ID_0 SUBNET_ID_1=$SUBNET_ID_1 SECURITY_GROUP=$SECURITY_GROUP"
+```
