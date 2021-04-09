@@ -1,0 +1,22 @@
+apiVersion: v0
+clusters:
+  - name: workflows
+    provider: gke
+    location: $LOCATION
+    project_id: $PROJECT_ID
+    resourceLabels:
+      name: workflows
+      env: dev
+    nodePools:
+      - name: cpu
+        machineType: "e2-standard-4"
+        initialNodeCount: 2
+        autoscaling:
+          enabled: true
+          minNodeCount: 2
+          maxNodeCount: 5
+        config:
+          metadata:
+            nodepool: cpu
+          labels:
+            type: cpu
