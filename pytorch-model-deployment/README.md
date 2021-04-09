@@ -144,3 +144,13 @@ Apply resources
 ```sh
 astrobase apply -f resources.yaml -v "LOCATION=us-east-1
 ```
+
+It takes a couple of minutes to get the service running, but once you get the loadbalancer, make your request like so
+
+```sh
+$ curl -s -X POST -d '{"url": "https://i.imgur.com/NZHKADF.jpg"}' -H 'Content-Type: application/json' http://a57319df8f136416d9306f9c1b0da046-1956442723.us-east-1.elb.amazonaws.com/predict | jq
+[
+  "golden_retriever",
+  66.94183349609375
+]
+```

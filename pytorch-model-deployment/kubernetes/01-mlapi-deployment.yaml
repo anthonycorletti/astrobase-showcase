@@ -20,8 +20,8 @@ spec:
           image: astrobase/mlapi
           resources:
             requests:
-              memory: "8Gi"
+              memory: "5Gi"
               cpu: "1000m"
             limits:
-              memory: "10Gi"
+              memory: "13Gi"
               cpu: "2000m"

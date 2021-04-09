@@ -15,12 +15,12 @@ clusters:
       env: dev
     nodegroups:
       - nodegroupName: cpu
-        instanceTypes: ["m4.large"]
+        instanceTypes: ["m4.xlarge"]
         diskSize: 200
         scalingConfig:
-          minSize: 1
-          maxSize: 3
-          desiredSize: 1
+          minSize: 2
+          maxSize: 5
+          desiredSize: 2
         nodeRole: $NODE_ROLE_ARN
         tags:
           nodegroup: cpu
