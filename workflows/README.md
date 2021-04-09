@@ -1,6 +1,6 @@
 # Argo on GCP
 
-Workflows, Continuous Delivery, Rollouts, and Events.
+Workflows and Events.
 
 ## Check your Astrobase CLI and Server
 
@@ -54,8 +54,21 @@ You will need to add an admin rolebinding for this example
 $ kubectl create clusterrolebinding default-admin-argo --clusterrole=cluster-admin --user=system:serviceaccount:default:default
 ```
 
-## Run a workflow!
+## Run a workflow
 
 ```sh
 $ argo submit --watch workflows/workflows/hello-world.yaml
+```
+
+## Emit Events
+
+```sh
+$ kubectl port-forward svc/events-webhook 27477:2747
+$ curl -d '{"message": "hello world"}' -H "Content-Type: application/json" -X POST http://localhost:27477/example
+```
+
+And check that the workflow was emitted!
+
+```sh
+$ kubectl get workflows
 ```
