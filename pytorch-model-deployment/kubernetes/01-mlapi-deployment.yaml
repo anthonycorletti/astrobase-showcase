@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mlapi
+  name: mlapi
+  labels:
+    app: mlapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlapi
+  template:
+    metadata:
+      labels:
+        app: mlapi
+    spec:
+      containers:
+        - name: mlapi
+          image: astrobase/mlapi
+          resources:
+            requests:
+              memory: "8Gi"
+              cpu: "1000m"
+            limits:
+              memory: "10Gi"
+              cpu: "2000m"

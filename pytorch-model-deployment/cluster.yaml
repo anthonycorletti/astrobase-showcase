@@ -15,6 +15,8 @@ clusters:
       env: dev
     nodegroups:
       - nodegroupName: cpu
+        instanceTypes: ["m4.large"]
+        diskSize: 200
         scalingConfig:
           minSize: 1
           maxSize: 3
