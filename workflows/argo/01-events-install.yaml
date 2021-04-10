@@ -122,6 +122,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: argo-events-sa
+  namespace: default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -314,6 +315,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eventbus-controller
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -358,6 +360,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eventsource-controller
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -400,6 +403,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sensor-controller
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -436,184 +440,3 @@ spec:
         runAsNonRoot: true
         runAsUser: 9731
       serviceAccountName: argo-events-sa
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: argo-events-webhook-sa
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: argo-events-webhook
-rules:
-  - apiGroups:
-      - ""
-    resources:
-      - secrets
-    verbs:
-      - get
-      - list
-      - create
-      - update
-      - delete
-      - patch
-      - watch
-  - apiGroups:
-      - ""
-    resources:
-      - configmaps
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - apps
-    resources:
-      - deployments
-    verbs:
-      - get
-      - list
-  - apiGroups:
-      - admissionregistration.k8s.io
-    resources:
-      - validatingwebhookconfigurations
-    verbs:
-      - get
-      - list
-      - create
-      - update
-      - delete
-      - patch
-      - watch
-  - apiGroups:
-      - argoproj.io
-    resources:
-      - eventbus
-      - eventsources
-      - sensors
-    verbs:
-      - get
-      - list
-      - watch
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: argo-events-webhook-binding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: argo-events-webhook
-subjects:
-  - kind: ServiceAccount
-    name: argo-events-webhook-sa
-    namespace: default
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: events-webhook
-spec:
-  ports:
-    - port: 443
-      targetPort: 443
-  selector:
-    app: events-webhook
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: events-webhook
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: events-webhook
-  template:
-    metadata:
-      labels:
-        app: events-webhook
-    spec:
-      containers:
-        - env:
-            - name: NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-          image: argoproj/events-webhook:latest
-          imagePullPolicy: Always
-          name: webhook
-      serviceAccountName: argo-events-webhook-sa
----
-apiVersion: argoproj.io/v1alpha1
-kind: EventBus
-metadata:
-  name: default
-spec:
-  nats:
-    native:
-      # Optional, defaults to 3. If it is < 3, set it to 3, that is the minimal requirement.
-      replicas: 3
-      # Optional, authen strategy, "none" or "token", defaults to "none"
-      auth: token
-#      containerTemplate:
-#        resources:
-#          requests:
-#            cpu: "10m"
-#      metricsContainerTemplate:
-#        resources:
-#          requests:
-#            cpu: "10m"
-#      antiAffinity: false
-#      persistence:
-#        storageClassName: standard
-#        accessMode: ReadWriteOnce
-#        volumeSize: 10Gi
----
-apiVersion: argoproj.io/v1alpha1
-kind: Sensor
-metadata:
-  name: webhook
-spec:
-  template:
-    serviceAccountName: argo-events-sa
-  dependencies:
-    - name: test-dep
-      eventSourceName: webhook
-      eventName: example
-  triggers:
-    - template:
-        name: webhook-workflow-trigger
-        k8s:
-          group: argoproj.io
-          version: v1alpha1
-          resource: workflows
-          operation: create
-          source:
-            resource:
-              apiVersion: argoproj.io/v1alpha1
-              kind: Workflow
-              metadata:
-                generateName: webhook-
-              spec:
-                entrypoint: whalesay
-                arguments:
-                  parameters:
-                    - name: message
-                      # the value will get overridden by event payload from test-dep
-                      value: hello world
-                templates:
-                  - name: whalesay
-                    serviceAccountName: argo-events-sa
-                    inputs:
-                      parameters:
-                        - name: message
-                    container:
-                      image: docker/whalesay:latest
-                      command: [cowsay]
-                      args: ["{{inputs.parameters.message}}"]
-          parameters:
-            - src:
-                dependencyName: test-dep
-              dest: spec.arguments.parameters.0.value

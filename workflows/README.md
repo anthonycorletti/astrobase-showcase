@@ -34,7 +34,7 @@ $ astrobase apply -f cluster.yaml -v "PROJECT_ID=$(gcloud config get-value proje
 }
 ```
 
-## Apply Argo Workflow Resources
+## Apply Argo Workflow and Events Resources
 
 ```sh
 $ astrobase apply -f resources.yaml
@@ -46,29 +46,32 @@ Check that Argo is running
 $ kubectl port-forward svc/argo-server 2746:2746
 ```
 
-Then visit https://:2746 in your browser. There will be a self signed cert that you can safely bypass.
+Then visit https://localhost:2746 in your browser. There will be a self signed cert that you can safely bypass.
 
-You will need to add an admin rolebinding for this example
-
-```sh
-$ kubectl create clusterrolebinding default-admin-argo --clusterrole=cluster-admin --user=system:serviceaccount:default:default
-```
+Copy your auth token with `argo auth token | pbcopy` and use that to log in.
 
 ## Run a workflow
 
 ```sh
-$ argo submit --watch workflows/workflows/hello-world.yaml
+$ argo submit --watch workflows/hello-world.yaml
 ```
 
-## Emit Events
+## Events
+
+Now that we have workflows running, let's deploy argo events and trigger a workflow with a webhook.
 
 ```sh
-$ kubectl port-forward $(kubectl get pod -l app=events-webhook -o name) 12000:12000
+$ kubectl port-forward $(kubectl get pod -l eventsource-name=webhook -o name) 12000:12000
 $ curl -d '{"message": "hello world"}' -H "Content-Type: application/json" -X POST http://localhost:12000/example
+success
 ```
 
 And check that the workflow was emitted!
 
 ```sh
-$ kubectl get workflows
+$ kubectl get workflows | grep "webhook"
+webhook-msd8q       Succeeded   12s
 ```
+
+
+
