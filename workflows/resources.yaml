@@ -1,7 +1,12 @@
 apiVersion: v0
 resources:
-  - name: argo
+  - name: argo-workflows
     provider: gke
     cluster_name: workflows
     cluster_location: $LOCATION
-    resource_location: argo
+    resource_location: argo-workflows
+  - name: argo-events
+    provider: gke
+    cluster_name: workflows
+    cluster_location: $LOCATION
+    resource_location: argo-events

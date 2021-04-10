@@ -37,10 +37,12 @@ $ astrobase apply -f cluster.yaml -v "PROJECT_ID=$(gcloud config get-value proje
 ## Apply Argo Workflow and Events Resources
 
 ```sh
-$ astrobase apply -f resources.yaml
+$ astrobase apply -f resources.yaml -v "LOCATION=us-central1-c"
 ```
 
-Check that Argo is running
+You may need to run that again incase the API server doesnt start in time to create the Argo Event, EventSource, and Sourcer api endpoints.
+
+Check that Argo is running ...
 
 ```sh
 $ kubectl port-forward svc/argo-server 2746:2746
@@ -58,7 +60,7 @@ $ argo submit --watch workflows/hello-world.yaml
 
 ## Events
 
-Now that we have workflows running, let's deploy argo events and trigger a workflow with a webhook.
+Now that we have workflows running, let's trigger a workflow with a webhook.
 
 ```sh
 $ kubectl port-forward $(kubectl get pod -l eventsource-name=webhook -o name) 12000:12000
@@ -69,9 +71,14 @@ success
 And check that the workflow was emitted!
 
 ```sh
-$ kubectl get workflows | grep "webhook"
-webhook-msd8q       Succeeded   12s
+$ kubectl get workflows -l events.argoproj.io/sensor=webhook
+NAME            STATUS      AGE
+webhook-w66xz   Succeeded   60s
 ```
 
+## Cleanup!
 
+```sh
+$ astrobase destroy -f cluster.yaml -v "PROJECT_ID=$(gcloud config get-value project) LOCATION=us-central1-c"
+```
 
