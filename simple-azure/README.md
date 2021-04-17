@@ -12,11 +12,11 @@ $ az group create --name my-resource-group --location eastus
 
 Follow these links (assuming you have an admin owner configured as yourself already)
 
-1. Register an application with Azure AD and create a service principal, https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#app-registration-app-objects-and-service-principals
-1. Assign a role to the application https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#assign-a-role-to-the-application
-1. https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in
-1. Authentication: Applciation Secret https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret
-1. https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#configure-access-policies-on-resources
+1. Register an application with Azure AD and create a service principal - https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#app-registration-app-objects-and-service-principals
+1. Assign a role to the application - https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#assign-a-role-to-the-application
+1. Get the tenant and App ID values for sign in - https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in
+1. Authentication via Applciation Secret - https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret
+1. Configure Access Policies for resources - https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#configure-access-policies-on-resources
 
 #### Export Azure Credentials in the shell session where you initialize astrobase
 
