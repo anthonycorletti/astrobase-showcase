@@ -1,0 +1,14 @@
+apiVersion: v0
+resources:
+  - name: kubernetes-dashboard
+    provider: aks
+    cluster_name: astrobase-test-aks
+    cluster_location: eastus
+    resource_group_name: $RESOURCE_GROUP_NAME
+    resource_location: https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
+  - name: simple-nginx
+    provider: aks
+    cluster_name: astrobase-test-aks
+    cluster_location: eastus
+    resource_group_name: $RESOURCE_GROUP_NAME
+    resource_location: tests/assets/kubernetes
