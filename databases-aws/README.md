@@ -138,6 +138,8 @@ $ curl -s -X GET "http://:8787/eks/database-testing/nodegroups/database-testing?
 $ astrobase apply -f databases.yaml
 ```
 
+If the command fails, simply re-run it. It takes an extra second or two for kubernetes to provision custom resource definitions for Druid and Clickhouse.
+
 ### Connect to Postgres
 
 ```sh
@@ -168,12 +170,6 @@ Connecting to a14502ebbff0d4f4d97f0d9c42ecac33-354106546.us-east-1.elb.amazonaws
 Connected to ClickHouse server version 21.4.6 revision 54447.
 
 chi-pv-simple-shards-0-0-0.chi-pv-simple-shards-0-0.default.svc.cluster.local :)
-```
-
-## Destroy Databases
-
-```sh
-$ astrobase destroy -f databases.yaml
 ```
 
 ## Destroy EKS cluster
