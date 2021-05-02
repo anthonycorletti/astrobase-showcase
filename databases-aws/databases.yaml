@@ -1,0 +1,17 @@
+apiVersion: v0
+resources:
+  - name: postgres
+    provider: eks
+    cluster_name: database-testing
+    cluster_location: us-east-1
+    resource_location: postgres
+  - name: druid
+    provider: eks
+    cluster_name: database-testing
+    cluster_location: us-east-1
+    resource_location: druid
+  # - name: clickhouse
+  #   provider: eks
+  #   cluster_name: database-testing
+  #   cluster_location: us-east-1
+  #   resource_location: https://raw.githubusercontent.com/Altinity/clickhouse-operator/master/deploy/operator/clickhouse-operator-install.yaml

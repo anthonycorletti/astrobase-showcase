@@ -1,0 +1,25 @@
+apiVersion: v0
+clusters:
+  - name: database-testing
+    provider: eks
+    region: us-east-1
+    roleArn: $CLUSTER_ROLE_ARN
+    resourcesVpcConfig:
+      subnetIds:
+        - $SUBNET_ID_0
+        - $SUBNET_ID_1
+      securityGroupIds:
+        - $SECURITY_GROUP
+    tags:
+      name: database-testing
+      env: test
+    nodegroups:
+      - nodegroupName: database-testing
+        instanceTypes: ["m4.large"]
+        scalingConfig:
+          minSize: 1
+          maxSize: 3
+          desiredSize: 1
+        nodeRole: $NODE_ROLE_ARN
+        tags:
+          nodegroup: cpu
