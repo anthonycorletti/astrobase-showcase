@@ -131,20 +131,6 @@ spec:
       extra.jvm.options: |-
         -Xmx512M
         -Xms512M
-      hpAutoscaler:
-        maxReplicas: 10
-        minReplicas: 1
-        scaleTargetRef:
-          apiVersion: apps/v1
-          kind: StatefulSet
-          name: druid-tiny-cluster-brokers
-        metrics:
-          - type: Resource
-            resource:
-              name: cpu
-              target:
-                type: Utilization
-                averageUtilization: 50
 
     coordinators:
       # Optionally specify for running coordinator as Deployment

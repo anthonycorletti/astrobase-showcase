@@ -10,8 +10,8 @@ resources:
     cluster_name: database-testing
     cluster_location: us-east-1
     resource_location: druid
-  # - name: clickhouse
-  #   provider: eks
-  #   cluster_name: database-testing
-  #   cluster_location: us-east-1
-  #   resource_location: https://raw.githubusercontent.com/Altinity/clickhouse-operator/master/deploy/operator/clickhouse-operator-install.yaml
+  - name: clickhouse
+    provider: eks
+    cluster_name: database-testing
+    cluster_location: us-east-1
+    resource_location: clickhouse

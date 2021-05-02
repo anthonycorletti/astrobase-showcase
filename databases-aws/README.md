@@ -1,5 +1,11 @@
 # showcase/databases-aws
 
+- [Set up Astrobase](#set-up-astrobase)
+- [Create EKS Cluster](#create-eks-cluster)
+- [Deploy Databases](#deploy-databases)
+- [Destroy Databases](#destroy-databases)
+- [Destroy EKS cluster](#destroy-eks-cluster)
+
 Deploy Apache Druid, Postgres, and ClickHouse to EKS.
 
 ## Set up Astrobase
@@ -135,11 +141,7 @@ $ astrobase apply -f databases.yaml
 ### Connect to Postgres
 
 ```sh
-$ kubectl port-forward svc/postgres 5432:5432
-Forwarding from 127.0.0.1:5432 -> 5432
-```
-
-```sh
+$ kubectl port-forward svc/postgres 5432:5432 &
 $ psql -h localhost -U postgres --password -p 5432
 Password:
 psql (13.2, server 10.4 (Debian 10.4-2.pgdg90+1))
@@ -151,13 +153,30 @@ Did not find any relations.
 
 ### Connect to Druid
 
+```sh
+$ kubectl port-forward svc/druid-tiny-cluster-routers 8088:8088 &
+$ open http://localhost:8088/
+```
+
+### Connect to Clickhouse
+
+```sh
+$ export CLICKHOUSE_LOADBALANCER=$(kubectl get svc --field-selector metadata.name=clickhouse-pv-simple -o json | jq -r '.items[0].status.loadBalancer.ingress[0].hostname')
+$ docker run -it yandex/clickhouse-client -h $CLICKHOUSE_LOADBALANCER -u clickhouse_operator --password clickhouse_operator_password
+ClickHouse client version 21.4.6.55 (official build).
+Connecting to a14502ebbff0d4f4d97f0d9c42ecac33-354106546.us-east-1.elb.amazonaws.com:9000 as user clickhouse_operator.
+Connected to ClickHouse server version 21.4.6 revision 54447.
+
+chi-pv-simple-shards-0-0-0.chi-pv-simple-shards-0-0.default.svc.cluster.local :)
+```
+
 ## Destroy Databases
 
 ```sh
 $ astrobase destroy -f databases.yaml
 ```
 
-## Destroy the cluster
+## Destroy EKS cluster
 
 ```sh
 $ astrobase destroy -f cluster.yaml -v "CLUSTER_ROLE_ARN=$CLUSTER_ROLE_ARN NODE_ROLE_ARN=$NODE_ROLE_ARN SUBNET_ID_0=$SUBNET_ID_0 SUBNET_ID_1=$SUBNET_ID_1 SECURITY_GROUP=$SECURITY_GROUP"

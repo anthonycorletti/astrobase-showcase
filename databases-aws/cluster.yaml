@@ -18,7 +18,7 @@ clusters:
         instanceTypes: ["m4.large"]
         scalingConfig:
           minSize: 1
-          maxSize: 3
+          maxSize: 1
           desiredSize: 1
         nodeRole: $NODE_ROLE_ARN
         tags:
