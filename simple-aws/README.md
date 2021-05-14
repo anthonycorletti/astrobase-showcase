@@ -2,24 +2,27 @@
 
 Deploying an AWS EKS Cluster and a few sample kubernetes resources to get started.
 
-## Astrobase Versions
+## Setup and check Astrobase versions
 
 cli
 ```sh
 $ astrobase version
-🚀 Astrobase CLI 0.1.4 🧑‍🚀
+🚀 Astrobase CLI 0.2.1 🧑‍🚀
 ```
 
 server
 ```sh
+$ astrobase init
 $ curl -s -X GET "http://:8787/healthcheck" | jq
 {
   "api_version": "v0",
-  "api_release_version": "0.1.1",
+  "api_release_version": "0.1.6",
   "message": "We're on the air.",
-  "time": "2021-04-08 04:40:57.630589"
+  "time": "2021-05-14 20:43:04.924411"
 }
 ```
+
+You may have to run `aws configure` and set your credentials.
 
 ## Create EKS Cluster
 
@@ -46,7 +49,6 @@ $ curl -s -X GET "http://:8787/eks/simple?region=us-east-1" | jq '.cluster.statu
 
 ```sh
 $ astrobase apply -f resources.yaml -v "LOCATION=us-east-1 NGINX_CONTAINER_PORT=80 NGINX_MEM_REQUEST=64Mi NGINX_CPU_REQUEST=250m NGINX_MEM_LIMIT=128Mi NGINX_CPU_LIMIT=500m"
-applying resources to simple@us-east-1
 namespace/kubernetes-dashboard created
 serviceaccount/kubernetes-dashboard created
 service/kubernetes-dashboard created
@@ -61,7 +63,6 @@ clusterrolebinding.rbac.authorization.k8s.io/kubernetes-dashboard created
 deployment.apps/kubernetes-dashboard created
 service/dashboard-metrics-scraper created
 deployment.apps/dashboard-metrics-scraper created
-applying resources to simple@us-east-1
 deployment.apps/nginx-deployment created
 ```
 

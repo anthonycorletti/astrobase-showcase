@@ -7,15 +7,14 @@ Workflows and Events.
 ```sh
 $ astrobase check commands
 docker found at: /usr/local/bin/docker
-gcloud found at: /usr/local/google-cloud-sdk/bin/gcloud
 kubectl found at: /usr/local/bin/kubectl
 $ astrobase version && curl -s -X GET "http://:8787/healthcheck" | jq
-🚀 Astrobase CLI 0.1.6 🧑‍🚀
+🚀 Astrobase CLI 0.2.1 🧑‍🚀
 {
   "api_version": "v0",
-  "api_release_version": "0.1.3",
+  "api_release_version": "0.1.6",
   "message": "We're on the air.",
-  "time": "2021-04-09 16:16:46.192557"
+  "time": "2021-05-14 20:44:31.766744"
 }
 ```
 

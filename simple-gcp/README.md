@@ -7,18 +7,24 @@ Deploying a GCP GKE Cluster and a few sample kubernetes resources to get started
 cli
 ```sh
 $ astrobase version
-🚀 Astrobase CLI 0.1.6 🧑‍🚀
+🚀 Astrobase CLI 0.2.1 🧑‍🚀
 ```
 
 server
 ```sh
+$ astrobase init
 $ curl -s -X GET "http://:8787/healthcheck" | jq
 {
   "api_version": "v0",
-  "api_release_version": "0.1.3",
+  "api_release_version": "0.1.6",
   "message": "We're on the air.",
-  "time": "2021-04-08 04:40:57.630589"
+  "time": "2021-05-14 20:40:40.539647"
 }
+```
+
+You may have to export your google application credentials
+```sh
+export GOOGLE_APPLICATION_CREDENTIALS=/path/to/my/credentials.json
 ```
 
 ## Create GKE Cluster
@@ -47,7 +53,6 @@ $ curl -s -X GET "http://:8787/gke?project_id=$(gcloud config get-value project)
 
 ```sh
 $ astrobase apply -f resources.yaml -v "LOCATION=us-central1-c NGINX_CONTAINER_PORT=80 NGINX_MEM_REQUEST=64Mi NGINX_CPU_REQUEST=250m NGINX_MEM_LIMIT=128Mi NGINX_CPU_LIMIT=500m"
-applying resources to simple@us-central1-c
 namespace/kubernetes-dashboard created
 serviceaccount/kubernetes-dashboard created
 service/kubernetes-dashboard created
@@ -62,7 +67,6 @@ clusterrolebinding.rbac.authorization.k8s.io/kubernetes-dashboard created
 deployment.apps/kubernetes-dashboard created
 service/dashboard-metrics-scraper created
 deployment.apps/dashboard-metrics-scraper created
-applying resources to simple@us-central1-c
 deployment.apps/nginx-deployment created
 ```
 

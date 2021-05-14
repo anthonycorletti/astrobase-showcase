@@ -15,21 +15,20 @@ Deploy Apache Druid, Postgres, and ClickHouse to EKS.
 ```sh
 $ python -m pip install astrobase_cli
 $ astrobase version
-🚀 Astrobase CLI 0.1.9 🧑‍🚀
+🚀 Astrobase CLI 0.2.1 🧑‍🚀
 ```
 
 ### Check Command Prerequisites
 
-For this example, you will only need `aws`, `docker`, and `kubectl` available in your shell.
+For this example, `docker` and `kubectl` should be available in your shell.
 
 ```sh
 $ astrobase check commands
-az found at: /usr/local/bin/az
-aws found at: /usr/local/bin/aws
 docker found at: /usr/local/bin/docker
-gcloud found at: /usr/local/google-cloud-sdk/bin/gcloud
 kubectl found at: /usr/local/bin/kubectl
 ```
+
+Also run `aws configure` and supply the proper credential values you want to use for this example.
 
 ### Create your astrobase profile
 
@@ -66,12 +65,12 @@ Astrobase initialized and running at http://localhost:8787
 
 ```sh
 $ astrobase version && curl -s "http://:8787/healthcheck" | jq .
-🚀 Astrobase CLI 0.1.9 🧑‍🚀
+🚀 Astrobase CLI 0.2.1 🧑‍🚀
 {
   "api_version": "v0",
-  "api_release_version": "0.1.5",
+  "api_release_version": "0.1.6",
   "message": "We're on the air.",
-  "time": "2021-05-02 01:59:11.552895"
+  "time": "2021-05-14 20:46:23.619868"
 }
 ```
 
