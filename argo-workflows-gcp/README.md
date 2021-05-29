@@ -36,7 +36,7 @@ $ astrobase apply -f cluster.yaml -v "PROJECT_ID=$(gcloud config get-value proje
 ## Apply Argo Workflow and Events Resources
 
 ```sh
-$ astrobase apply -f resources.yaml -v "LOCATION=us-central1-c"
+$ astrobase apply -f resources.yaml -v "PROJECT_ID=$(gcloud config get-value project) LOCATION=us-central1-c"
 ```
 
 You may need to run that again incase the API server doesnt start in time to create the Argo Event, EventSource, and Sourcer api endpoints.

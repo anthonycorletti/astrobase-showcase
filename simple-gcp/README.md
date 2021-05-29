@@ -52,7 +52,7 @@ $ curl -s -X GET "http://:8787/gke?project_id=$(gcloud config get-value project)
 ## Deploy Kubernetes Dashboard and NGINX
 
 ```sh
-$ astrobase apply -f resources.yaml -v "LOCATION=us-central1-c NGINX_CONTAINER_PORT=80 NGINX_MEM_REQUEST=64Mi NGINX_CPU_REQUEST=250m NGINX_MEM_LIMIT=128Mi NGINX_CPU_LIMIT=500m"
+$ astrobase apply -f resources.yaml -v "LOCATION=us-central1-c PROJECT_ID=$(gcloud config get-value project) NGINX_CONTAINER_PORT=80 NGINX_MEM_REQUEST=64Mi NGINX_CPU_REQUEST=250m NGINX_MEM_LIMIT=128Mi NGINX_CPU_LIMIT=500m"
 namespace/kubernetes-dashboard created
 serviceaccount/kubernetes-dashboard created
 service/kubernetes-dashboard created
@@ -80,7 +80,7 @@ $ open http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/htt
 ## Destroy resources
 
 ```sh
-$ astrobase destroy -f resources.yaml -v "LOCATION=us-central1-c NGINX_CONTAINER_PORT=80 NGINX_MEM_REQUEST=64Mi NGINX_CPU_REQUEST=250m NGINX_MEM_LIMIT=128Mi NGINX_CPU_LIMIT=500m"
+$ astrobase destroy -f resources.yaml -v "LOCATION=us-central1-c PROJECT_ID=$(gcloud config get-value project) NGINX_CONTAINER_PORT=80 NGINX_MEM_REQUEST=64Mi NGINX_CPU_REQUEST=250m NGINX_MEM_LIMIT=128Mi NGINX_CPU_LIMIT=500m"
 destroying resources in simple@us-central1-c
 namespace "kubernetes-dashboard" deleted
 serviceaccount "kubernetes-dashboard" deleted

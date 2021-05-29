@@ -4,9 +4,11 @@ resources:
     provider: gke
     cluster_name: workflows
     cluster_location: $LOCATION
+    project_id: $PROJECT_ID
     resource_location: argo-workflows
   - name: argo-events
     provider: gke
     cluster_name: workflows
     cluster_location: $LOCATION
+    project_id: $PROJECT_ID
     resource_location: argo-events
