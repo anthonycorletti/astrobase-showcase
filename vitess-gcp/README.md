@@ -1,4 +1,4 @@
-# showcase/simple-gcp
+# showcase/vitess-gcp
 
 Deploying a Vitess Cluster on GCP GKE.
 
