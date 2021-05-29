@@ -1,6 +1,6 @@
 # showcase/simple-gcp
 
-Deploying a Vitess Clusters on GCP GKE.
+Deploying a Vitess Cluster on GCP GKE.
 
 ## Astrobase Versions
 
