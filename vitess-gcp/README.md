@@ -50,7 +50,7 @@ $ curl -s -X GET "http://:8787/gke/astrobase-vitess?project_id=$(gcloud config g
 
 ### Create GCS Bucket
 
-You have to use a globally unique name
+You have to use a globally unique name for your GCS bucket.
 
 ```sh
 $ export VITESS_BACKUPS_NAME="vitess-backups-$(date | sha256sum | head -c 7)"
@@ -63,7 +63,7 @@ $ kubectl create secret generic $VITESS_BACKUPS_NAME --from-file=$(astrobase pro
 $ astrobase apply -f vitess.yaml -v "PROJECT_ID=$(gcloud config get-value project) LOCATION=us-central1-a BACKUP_GCS_BUCKET_NAME=$VITESS_BACKUPS_NAME BACKUP_GCS_SECRET_NAME=$VITESS_BACKUPS_NAME BACKUP_GCS_SECRET_KEY=$(astrobase profile current | jq -r .gcp_creds | xargs basename) MYSQL_USER=my-user MYSQL_PASSWORD=my-password"
 ```
 
-If the first apply returns an error like `no matches for kind "VitessCluster" in version "planetscale.com/v2"`, you should re-run the command. Sometimes CustomResourceDefinitions take a few extra seconds to provision successfully. This is something we're actively looking into.
+If the first apply returns an error like `no matches for kind "VitessCluster" in version "planetscale.com/v2"`, you should re-run the command. Sometimes CustomResourceDefinitions take a few extra seconds to provision successfully. This is something we're actively looking into; feel free to file an [issue](https://github.com/astrobase/cli/issues) if you'd like to keep an eye out.
 
 Run a port forward to Vitess and apply a vschema and mysql schema to the Vitess database.
 
