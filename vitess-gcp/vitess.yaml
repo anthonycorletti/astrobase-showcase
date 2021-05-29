@@ -1,0 +1,8 @@
+apiVersion: v0
+resources:
+  - name: vitess-operator
+    provider: gke
+    cluster_name: astrobase-vitess
+    cluster_location: $LOCATION
+    project_id: $PROJECT_ID
+    resource_location: vitess-operator

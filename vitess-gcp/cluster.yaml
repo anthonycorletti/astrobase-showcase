@@ -1,0 +1,25 @@
+apiVersion: v0
+clusters:
+  - name: astrobase-vitess
+    provider: gke
+    location: $LOCATION
+    project_id: $PROJECT_ID
+    releaseChannel:
+      channel: STABLE
+    resourceLabels:
+      name: astrobase-vitess
+      env: vitess-dev
+    nodePools:
+      - name: default
+        initialNodeCount: 2
+        autoscaling:
+          enabled: true
+          minNodeCount: 2
+          maxNodeCount: 5
+        config:
+          machineType: e2-standard-16
+          diskSizeGb: 128
+          metadata:
+            nodepool: cpu
+          labels:
+            type: cpu
