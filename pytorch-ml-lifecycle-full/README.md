@@ -47,7 +47,7 @@ Here are five steps of the ML Model Life-Cycle we will cover:
 
 1. [Prepare the Data](#prepare-the-data)
 1. [Define the Model](#define-the-model)
-1. [Train the Model](#trainp-the-model)
+1. [Train the Model](#train-the-model)
 1. [Evaluate the Model](#evaluate-the-model)
 1. [Make Predictions](#make-predictions)
 

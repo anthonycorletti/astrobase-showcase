@@ -79,7 +79,7 @@ For more examples and ideas, visit:
 
 See [app.py](./app.py)
 
-Download your image classifing index
+Download your image classifying index
 
 ```sh
 $ curl https://raw.githubusercontent.com/raghakot/keras-vis/master/resources/imagenet_class_index.json -o imagenet_class_index.json

@@ -39,7 +39,7 @@ $ astrobase apply -f cluster.yaml -v "PROJECT_ID=$(gcloud config get-value proje
 $ astrobase apply -f resources.yaml -v "PROJECT_ID=$(gcloud config get-value project) LOCATION=us-central1-c"
 ```
 
-You may need to run that again incase the API server doesnt start in time to create the Argo Event, EventSource, and Sourcer api endpoints.
+You may need to run that again incase the API server doesn't start in time to create the Argo Event, EventSource, and Sourcer api endpoints.
 
 Check that Argo is running ...
 
