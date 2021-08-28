@@ -17,6 +17,7 @@ $ curl -s "http://:8787/healthcheck" | jq
   "message": "We're on the air.",
   "time": "2021-05-29 19:28:32.857380"
 }
+$ astrobase init
 ```
 
 ## Other requirements
