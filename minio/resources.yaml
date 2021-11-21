@@ -1,0 +1,7 @@
+apiVersion: v0
+resources:
+  - name: minio
+    provider: eks
+    cluster_name: minio-eks
+    cluster_location: us-east-1
+    resource_location: minio.yaml

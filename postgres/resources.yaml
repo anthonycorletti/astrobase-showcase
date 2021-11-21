@@ -1,0 +1,7 @@
+apiVersion: v0
+resources:
+  - name: postgres
+    provider: eks
+    cluster_name: postgres-eks
+    cluster_location: us-east-1
+    resource_location: postgres.yaml

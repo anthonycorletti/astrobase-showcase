@@ -1,0 +1,24 @@
+apiVersion: v0
+clusters:
+  - name: postgres-eks
+    provider: eks
+    region: us-east-1
+    roleArn: $CLUSTER_ROLE_ARN
+    resourcesVpcConfig:
+      subnetIds:
+        - $SUBNET_ID_0
+        - $SUBNET_ID_1
+      securityGroupIds:
+        - $SECURITY_GROUP
+    tags:
+      name: postgres-eks
+      env: dev
+    nodegroups:
+      - nodegroupName: cpu
+        scalingConfig:
+          minSize: 3
+          maxSize: 4
+          desiredSize: 3
+        nodeRole: $NODE_ROLE_ARN
+        tags:
+          nodegroup: cpu

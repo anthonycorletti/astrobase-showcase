@@ -1,0 +1,7 @@
+apiVersion: v0
+resources:
+  - name: mysql
+    provider: eks
+    cluster_name: mysql-eks
+    cluster_location: us-east-1
+    resource_location: mysql.yaml
